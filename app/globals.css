@@ -1,26 +1,222 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Navbar ── */
+
+.navbar {
+    width: 100%;
+    background: linear-gradient(135deg, #2f4f4f, #3d6b6b);
+    color: white;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 68px;
+}
+
+.navbar-brand {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar button {
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+    min-width: 110px;
+    padding: 9px 18px;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.navbar button:hover {
+    background: white;
+    border-color: white;
+    color: #2f4f4f;
+}
+
+.navbar button.primary {
+    background: #5fa8a8;
+    color: white;
+    border-color: #5fa8a8;
+}
+
+.navbar button.primary:hover {
+    background: #4a9090;
+    border-color: #4a9090;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.navbar a:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.body {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.project-wrapper {
+    padding: 30px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* ── Card Grid ── */
+
+.title {
+    text-align: center;
+    padding: 20px;
+}
+
+.card-grid, .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 24px;
+    padding: 32px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card-button {
+    background: white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 36px 40px;
+    border-left: 4px solid #3d6b6b;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 100px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2f4f4f;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.project-button {
+    background: white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 36px 40px;
+    border-left: 4px solid #3d6b6b;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 100px;
+    width: 350px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2f4f4f;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.card {
+    background: white;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 36px 40px;
+    border-left: 4px solid #3d6b6b;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden;
+    min-height: 50px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2f4f4f;
+    line-height: 1.2;
+    transition: margin-bottom 0.3s ease;
+    margin-bottom: 0;
+}
+
+.card-info {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.7;
+    max-height: 0;
+    overflow: auto;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease 0.1s;
+}
+
+.card:hover .card-title {
+    margin-bottom: 14px;
+}
+
+.card:hover .card-info {
+    max-height: 300px;
+    opacity: 1;
+}
+
+/* ── Footer ── */
+.footer {
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(to bottom, #2f4f4f, #1a2e2e);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    padding: 40px 24px;
+    margin-top: auto;
 }
