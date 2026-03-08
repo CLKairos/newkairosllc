@@ -1,7 +1,7 @@
-"use server"
+"use server";
 
 import { connectDB } from "./lib/db";
-import mongoose, { Schema, models, model } from "mongoose";
+import { Schema, models, model } from "mongoose";
 
 const SponsorshipSchema = new Schema({
     email:    { type: String, required: true },
@@ -12,18 +12,19 @@ const SponsorshipSchema = new Schema({
 });
 
 const PartnershipSchema = new Schema({
-    email:    { type: String, required: true },
-    website:  { type: String },
+    email:   { type: String, required: true },
+    website: { type: String },
     project: { type: String },
-    usBased:  { type: Boolean, default: false },
+    usBased: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
 });
 
 const Sponsorship = models.Sponsorship || model("Sponsorship", SponsorshipSchema);
 const Partnership = models.Partnership || model("Partnership", PartnershipSchema);
 
+type ActionState = { success: boolean; error: string | null } | null;
 
-export async function submitSponsorship(prevState: any, formData: FormData) {
+export async function submitSponsorship(prevState: ActionState, formData: FormData): Promise<ActionState> {
     try {
         await connectDB();
 
@@ -47,7 +48,7 @@ export async function submitSponsorship(prevState: any, formData: FormData) {
     }
 }
 
-export async function submitPartnership(prevState: any, formData: FormData) {
+export async function submitPartnership(prevState: ActionState, formData: FormData): Promise<ActionState> {
     try {
         await connectDB();
 
@@ -59,9 +60,9 @@ export async function submitPartnership(prevState: any, formData: FormData) {
 
         await Partnership.create({
             email,
-            website:  formData.get("website")?.toString() || "",
+            website: formData.get("website")?.toString() || "",
             project: formData.get("project")?.toString() || "",
-            usBased:  formData.get("usBased") === "true",
+            usBased: formData.get("usBased") === "true",
         });
 
         return { success: true, error: null };

@@ -13,15 +13,13 @@ const projects = [
         title: "Anna High School Student Council Newsletter",
         link: "https://ahsstuconewsletter.kairosllc.org",
     },
+];
 
-]
-
-export default function ProjectList(){
-    return(
-        <div className={"projectlist"}>
+export default function ProjectList() {
+    return (
+        <div className="projectlist">
             {projects.map((project) => (
-                // eslint-disable-next-line react/jsx-key
-                <Project title={project.title} link={project.link} />
+                <Project key={project.link} title={project.title} link={project.link} />
             ))}
         </div>
     );

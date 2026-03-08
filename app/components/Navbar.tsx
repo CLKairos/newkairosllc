@@ -1,27 +1,25 @@
-
 const pages = [
-    {name: "Home", locaiton: "/",},
-    {name: "About", locaiton: "/about",},
-    {name: "Projects", locaiton: "/projects",},
-    {name: "Sponsors", locaiton: "/sponsors",},
-    {name: "Partnerships", locaiton: "/partnerships",},
-    {name: "Contact", locaiton: "/contact",},
-]
+    { name: "Home", location: "/" },
+    { name: "About", location: "/about" },
+    { name: "Projects", location: "/projects" },
+    { name: "Sponsors", location: "/sponsors" },
+    { name: "Partnerships", location: "/partnerships" },
+    { name: "Contact", location: "/contact" },
+];
 
 export default function Navbar() {
-    return(
-        <div className={"navbar"}>
-            <div className={"navbar-inner"}>
-                <div className={"navbar-brand"}>
+    return (
+        <div className="navbar">
+            <div className="navbar-inner">
+                <div className="navbar-brand">
                     <h1>KairosLLC</h1>
                 </div>
-                <div className={"navbar-buttons"}>
-                    {
-                        pages.map((page) => (
-                            // eslint-disable-next-line react/jsx-key
-                            <a href={page.locaiton}><button>{page.name}</button></a>
-                        ))
-                    }
+                <div className="navbar-buttons">
+                    {pages.map((page) => (
+                        <a key={page.name} href={page.location}>
+                            <button>{page.name}</button>
+                        </a>
+                    ))}
                 </div>
             </div>
         </div>
