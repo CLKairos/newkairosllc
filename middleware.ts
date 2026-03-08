@@ -17,7 +17,7 @@ function getIP(req: NextRequest): string {
 export function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith("/dashboard")) {
         const ip = getIP(req);
-        
+
         if (!ALLOWED_IP) {
             console.warn("[dashboard] DASHBOARD_ALLOWED_IP is not set — blocking all access");
             return NextResponse.rewrite(new URL("/403", req.url));
