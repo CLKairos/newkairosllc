@@ -11,6 +11,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
 }
 
 /* ── Navbar ── */
@@ -208,6 +210,123 @@ body {
 .card:hover .card-info {
     max-height: 300px;
     opacity: 1;
+}
+
+.partnerlist {
+    display: grid;
+    /* Creates 4 equal columns explicitly */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.partner img{
+    padding: 40px;
+    max-width: 400px;
+}
+
+.about-text {
+    font-size: 32px;
+    padding: 40px;
+    max-width: 75vw;
+}
+
+/* Container and Form overall */
+.sponsor-section {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    width: 1000px;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.form-container {
+    background: #fff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 75%;
+    max-width: 450px;
+}
+
+.sponsor-form h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    color: #1a1a1a;
+    text-align: center;
+}
+
+/* Individual Input Groups */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.input-group input {
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* Checkbox Alignment */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-group label {
+    font-size: 0.95rem;
+    color: #555;
+    cursor: pointer;
+    user-select: none; /* Prevents text highlighting on accidental double-clicks */
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #3d6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #ddd;
+    color: #3d6b6b;
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
 }
 
 /* ── Footer ── */
