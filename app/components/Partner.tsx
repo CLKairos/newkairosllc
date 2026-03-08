@@ -1,4 +1,4 @@
-export default function Partner(data){
+export default function Partner(data: { link: string | undefined; image: string | Blob | undefined; name: string | undefined; }){
     return(
         <div className={"partner"}>
             <a href={data.link}>

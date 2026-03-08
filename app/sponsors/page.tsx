@@ -1,33 +1,39 @@
 "use client"
-import { submitSponsorship } from "../actions";
+import { useActionState } from "react";
+import {submitSponsorship} from "../actions";
 import SponsorList from "@/app/components/SponsorList";
 
-export default function Sponsors(){
-    return(
+export default function Sponsors() {
+    const [state, action] = useActionState(submitSponsorship, null);
+
+    return (
         <div className={"body"}>
-            <SponsorList />
+            <SponsorList/>
             <section className="sponsor-section">
                 <div className="form-container">
-                    <form action={submitSponsorship} className="sponsor-form">
+                    <form action={action} className="sponsor-form">
                         <h2>Become a Sponsor!</h2>
+
+                        {state?.success && <p className="success-msg">Proposal submitted!</p>}
+                        {state?.error && <p className="error-msg">{state.error}</p>}
 
                         <div className="input-group">
                             <label htmlFor="email">Email Address</label>
-                            <input type="email" id="email" placeholder="email@company.com" required />
+                            <input type="email" id="email" name="email" placeholder="email@company.com" required/>
                         </div>
 
                         <div className="input-group">
                             <label htmlFor="website">Website URL</label>
-                            <input type="url" id="website" placeholder="https://example.com" />
+                            <input type="url" id="website" name="website" placeholder="https://example.com"/>
                         </div>
 
                         <div className="input-group">
                             <label htmlFor="proposal">What will you provide to us?</label>
-                            <input type="text" id="proposal" placeholder="e.g., Financial support, equipment..." />
+                            <input type="text" id="proposal" name="proposal" placeholder="e.g., Financial support, equipment..."/>
                         </div>
 
                         <div className="checkbox-group">
-                            <input type="checkbox" id="us-based" />
+                            <input type="checkbox" id="us-based" name="usBased" value="true"/>
                             <label htmlFor="us-based">Are you a US based company?</label>
                         </div>
 

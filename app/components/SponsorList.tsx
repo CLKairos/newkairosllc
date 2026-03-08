@@ -1,7 +1,11 @@
 import Sponsor from "./Sponsor";
 
 const sponsor = [
-
+    {
+        name: "",
+        image: "",
+        link: "",
+    }
 ]
 
 export default function PartnerList(){
