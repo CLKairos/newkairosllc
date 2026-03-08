@@ -1,27 +1,40 @@
 "use server";
+"use server";
 
-import { connectDB } from "./lib/db";
+import { revalidatePath } from "next/cache";
+import { connectDB } from "@/app/lib/db";
 import { Schema, models, model } from "mongoose";
 
 const SponsorshipSchema = new Schema({
-    email:    { type: String, required: true },
-    website:  { type: String },
-    proposal: { type: String },
-    usBased:  { type: Boolean, default: false },
+    email:     { type: String, required: true },
+    website:   { type: String },
+    proposal:  { type: String },
+    usBased:   { type: Boolean, default: false },
+    status:    { type: String, enum: ["pending", "accepted", "denied"], default: "pending" },
     createdAt: { type: Date, default: Date.now },
 });
 
 const PartnershipSchema = new Schema({
-    email:   { type: String, required: true },
-    website: { type: String },
-    project: { type: String },
-    usBased: { type: Boolean, default: false },
+    email:     { type: String, required: true },
+    website:   { type: String },
+    project:   { type: String },
+    usBased:   { type: Boolean, default: false },
+    status:    { type: String, enum: ["pending", "accepted", "denied"], default: "pending" },
     createdAt: { type: Date, default: Date.now },
 });
 
 const Sponsorship = models.Sponsorship || model("Sponsorship", SponsorshipSchema);
 const Partnership = models.Partnership || model("Partnership", PartnershipSchema);
 
+type Status = "accepted" | "denied";
+type Collection = "sponsorship" | "partnership";
+
+export async function updateStatus(id: string, collection: Collection, status: Status) {
+    await connectDB();
+    const Model = collection === "sponsorship" ? Sponsorship : Partnership;
+    await Model.findByIdAndUpdate(id, { status });
+    revalidatePath("/dashboard");
+}
 type ActionState = { success: boolean; error: string | null } | null;
 
 export async function submitSponsorship(prevState: ActionState, formData: FormData): Promise<ActionState> {

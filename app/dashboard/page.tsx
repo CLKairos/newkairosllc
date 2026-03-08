@@ -1,13 +1,15 @@
 import { connectDB } from "@/app/lib/db";
 import { Schema, models, model } from "mongoose";
+import StatusButtons from "../components/StatusButtons";
 
-// --- Schemas (mirrors actions.ts) ---
+// --- Schemas ---
 
 const SponsorshipSchema = new Schema({
     email:     { type: String, required: true },
     website:   { type: String },
     proposal:  { type: String },
     usBased:   { type: Boolean, default: false },
+    status:    { type: String, enum: ["pending", "accepted", "denied"], default: "pending" },
     createdAt: { type: Date, default: Date.now },
 });
 
@@ -16,6 +18,7 @@ const PartnershipSchema = new Schema({
     website:   { type: String },
     project:   { type: String },
     usBased:   { type: Boolean, default: false },
+    status:    { type: String, enum: ["pending", "accepted", "denied"], default: "pending" },
     createdAt: { type: Date, default: Date.now },
 });
 
@@ -31,6 +34,7 @@ interface Submission {
     proposal?: string;
     project?: string;
     usBased: boolean;
+    status: "pending" | "accepted" | "denied";
     createdAt: string;
 }
 
@@ -51,6 +55,7 @@ async function getData(): Promise<{ sponsorships: Submission[]; partnerships: Su
             proposal: d.proposal || "",
             project: d.project || "",
             usBased: d.usBased,
+            status: d.status ?? "pending",
             createdAt: new Date(d.createdAt).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "short",
@@ -64,12 +69,12 @@ async function getData(): Promise<{ sponsorships: Submission[]; partnerships: Su
     };
 }
 
-// --- Components ---
+// --- Sub-components ---
 
-function StatCard({ label, value }: { label: string; value: number }) {
+function StatCard({ label, value, accent }: { label: string; value: number; accent?: string }) {
     return (
         <div className="stat-card">
-            <span className="stat-value">{value}</span>
+            <span className="stat-value" style={accent ? { color: accent } : undefined}>{value}</span>
             <span className="stat-label">{label}</span>
         </div>
     );
@@ -77,9 +82,13 @@ function StatCard({ label, value }: { label: string; value: number }) {
 
 function SubmissionRow({ row, type }: { row: Submission; type: "sponsorship" | "partnership" }) {
     return (
-        <tr className="submission-row">
+        <tr className={`submission-row row-${row.status}`}>
             <td>{row.email}</td>
-            <td>{row.website ? <a href={row.website} target="_blank" rel="noreferrer">{row.website}</a> : "—"}</td>
+            <td>
+                {row.website
+                    ? <a href={row.website} target="_blank" rel="noreferrer">{row.website}</a>
+                    : "—"}
+            </td>
             <td>{type === "sponsorship" ? row.proposal || "—" : row.project || "—"}</td>
             <td>
         <span className={`badge ${row.usBased ? "badge-yes" : "badge-no"}`}>
@@ -87,6 +96,9 @@ function SubmissionRow({ row, type }: { row: Submission; type: "sponsorship" | "
         </span>
             </td>
             <td>{row.createdAt}</td>
+            <td>
+                <StatusButtons id={row._id} collection={type} status={row.status} />
+            </td>
         </tr>
     );
 }
@@ -95,6 +107,11 @@ function SubmissionRow({ row, type }: { row: Submission; type: "sponsorship" | "
 
 export default async function Dashboard() {
     const { sponsorships, partnerships } = await getData();
+
+    const all      = [...sponsorships, ...partnerships];
+    const accepted = all.filter((r) => r.status === "accepted").length;
+    const denied   = all.filter((r) => r.status === "denied").length;
+    const pending  = all.filter((r) => r.status === "pending").length;
 
     return (
         <>
@@ -105,9 +122,12 @@ export default async function Dashboard() {
                 </div>
 
                 <div className="stats-row">
+                    <StatCard label="Total" value={all.length} />
+                    <StatCard label="Pending" value={pending} accent="#94a3b8" />
+                    <StatCard label="Accepted" value={accepted} accent="#4ade80" />
+                    <StatCard label="Denied" value={denied} accent="#f87171" />
                     <StatCard label="Sponsorships" value={sponsorships.length} />
                     <StatCard label="Partnerships" value={partnerships.length} />
-                    <StatCard label="Total Submissions" value={sponsorships.length + partnerships.length} />
                 </div>
 
                 <div className="section">
@@ -124,6 +144,7 @@ export default async function Dashboard() {
                                     <th>Proposal</th>
                                     <th>US Based</th>
                                     <th>Date</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -150,6 +171,7 @@ export default async function Dashboard() {
                                     <th>Project</th>
                                     <th>US Based</th>
                                     <th>Date</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
