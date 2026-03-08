@@ -17,10 +17,7 @@ function getIP(req: NextRequest): string {
 export function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith("/dashboard")) {
         const ip = getIP(req);
-
-        // Temporary: log the detected IP to Vercel function logs so you can verify
-        console.log("[dashboard] detected IP:", ip, "| allowed:", ALLOWED_IP);
-
+        
         if (!ALLOWED_IP) {
             console.warn("[dashboard] DASHBOARD_ALLOWED_IP is not set — blocking all access");
             return NextResponse.rewrite(new URL("/403", req.url));
