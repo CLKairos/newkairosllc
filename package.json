@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@vercel/functions": "^3.4.3",
+    "firebase": "^12.10.0",
+    "firebase-admin": "^13.7.0",
     "mongoose": "^9.2.4",
     "next": "16.1.6",
     "react": "19.2.3",
