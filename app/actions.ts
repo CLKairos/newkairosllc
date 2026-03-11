@@ -5,9 +5,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { connectDB } from "@/app/lib/db";
 import { Schema, models, model, Types } from "mongoose";
-import { encryptjs } from "encryptjs";
-
-const secretKey = (process.env.AUTH_SECRET ?? process.env.DASHBOARD_ALLOWED_IP ?? "").trim();
+import bcrypt from "bcryptjs";
 
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 
@@ -61,15 +59,12 @@ type Collection  = "sponsorship" | "partnership";
 // ─── Auth helpers ───────────────────────────────────────────────────────────────
 
 function hashPassword(raw: string): string {
-    return encryptjs.encrypt(raw, secretKey, 256);
+    return bcrypt.hashSync(raw, 12);
 }
 
 function verifyPassword(raw: string, stored: string): boolean {
-    try {
-        return encryptjs.decrypt(stored, secretKey, 256) === raw;
-    } catch {
-        return false;
-    }
+    if (!stored) return false;
+    return bcrypt.compareSync(raw, stored);
 }
 
 async function getUid(): Promise<string | null> {
