@@ -36,7 +36,7 @@ export default function Home() {
             tag: "Productivity",
         },
         {
-            label: "Anna HS SkillsUSA",
+            label: "AHS SkillsUSA",
             href: "https://annaskillsusa.kairosllc.org",
             description: "Official site for Anna High School's SkillsUSA chapter.",
             tag: "Education",
@@ -51,6 +51,7 @@ export default function Home() {
 
     return (
         <>
+
             <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap');
 

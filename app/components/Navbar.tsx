@@ -1,18 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { logout } from "@/app/actions";
 
 const pages = [
-    { name: "Home", location: "/" },
-    { name: "About", location: "/about" },
-    { name: "Projects", location: "/projects" },
-    { name: "Sponsors", location: "/sponsors" },
+    { name: "Home",         location: "/" },
+    { name: "About",        location: "/about" },
+    { name: "Projects",     location: "/projects" },
+    { name: "Sponsors",     location: "/sponsors" },
     { name: "Partnerships", location: "/partnerships" },
-    { name: "Contact", location: "/contact" },
+    { name: "Contact",      location: "/contact" },
 ];
 
 export default function Navbar() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen]         = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+        // Check auth state from a lightweight API route
+        fetch("/api/auth/me")
+            .then((r) => r.json())
+            .then((data) => setLoggedIn(!!data.uid))
+            .catch(() => setLoggedIn(false));
+    }, []);
 
     return (
         <>
@@ -48,11 +58,22 @@ export default function Navbar() {
           border: none; background: transparent; cursor: pointer;
         }
         .navbar-link:hover { color: #f0f4f4; background: rgba(61,107,107,0.2); }
+
         .navbar-link.cta {
           background: #3d6b6b; color: #fff; font-weight: 600; margin-left: 8px;
           padding: 8px 18px; transition: background 0.15s, transform 0.15s;
         }
         .navbar-link.cta:hover { background: #4a8080; transform: translateY(-1px); }
+
+        .navbar-link.logout {
+          background: transparent; color: rgba(240,244,244,0.5); font-weight: 500;
+          margin-left: 8px; padding: 8px 18px; border: 1px solid rgba(61,107,107,0.4);
+          transition: color 0.15s, border-color 0.15s, background 0.15s;
+        }
+        .navbar-link.logout:hover {
+          color: #f0f4f4; border-color: #5fa8a8; background: rgba(61,107,107,0.15);
+          transform: none;
+        }
 
         /* Hamburger */
         .navbar-hamburger {
@@ -91,13 +112,30 @@ export default function Navbar() {
                     </a>
 
                     <div className="navbar-links">
-                        {pages.slice(0, -1).map((p) => (
+                        {pages.map((p) => (
                             <a key={p.name} href={p.location} className="navbar-link">{p.name}</a>
                         ))}
-                        <a href="/contact" className="navbar-link cta">Contact</a>
+
+                        {loggedIn ? (
+                            <>
+                                <a href="/user-dashboard" className="navbar-link cta">Dashboard</a>
+                                <form action={logout}>
+                                    <button type="submit" className="navbar-link logout">Log out</button>
+                                </form>
+                            </>
+                        ) : (
+                            <>
+                                <a href="/login"  className="navbar-link cta">Log in</a>
+                                <a href="/signup" className="navbar-link logout">Sign up</a>
+                            </>
+                        )}
                     </div>
 
-                    <button className={`navbar-hamburger ${open ? "open" : ""}`} onClick={() => setOpen(!open)} aria-label="Toggle menu">
+                    <button
+                        className={`navbar-hamburger ${open ? "open" : ""}`}
+                        onClick={() => setOpen(!open)}
+                        aria-label="Toggle menu"
+                    >
                         <span /><span /><span />
                     </button>
                 </div>
@@ -106,6 +144,20 @@ export default function Navbar() {
                     {pages.map((p) => (
                         <a key={p.name} href={p.location} className="navbar-link" onClick={() => setOpen(false)}>{p.name}</a>
                     ))}
+
+                    {loggedIn ? (
+                        <>
+                            <a href="/user-dashboard" className="navbar-link cta" onClick={() => setOpen(false)}>Dashboard</a>
+                            <form action={logout}>
+                                <button type="submit" className="navbar-link logout">Log out</button>
+                            </form>
+                        </>
+                    ) : (
+                        <>
+                            <a href="/login"  className="navbar-link cta"    onClick={() => setOpen(false)}>Log in</a>
+                            <a href="/signup" className="navbar-link logout" onClick={() => setOpen(false)}>Sign up</a>
+                        </>
+                    )}
                 </div>
             </nav>
         </>

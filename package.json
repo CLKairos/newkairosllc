@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@vercel/functions": "^3.4.3",
+    "bcryptjs": "^3.0.3",
+    "crypto-js": "^4.2.0",
     "firebase": "^12.10.0",
     "firebase-admin": "^13.7.0",
     "mongoose": "^9.2.4",
@@ -21,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "encryptjs": "^2.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "typescript": "^5"
