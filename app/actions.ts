@@ -1,30 +1,26 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect }       from "next/navigation";
-import { cookies }        from "next/headers";
-import { connectDB }      from "@/app/lib/db";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { connectDB } from "@/app/lib/db";
 import { Schema, models, model, Types } from "mongoose";
-import bcrypt from "bcryptjs";
+import { encryptjs } from "encryptjs";
 
-// ─── Env guard ──────────────────────────────────────────────────────────────────
-
-const secretKey = process.env.AUTH_SECRET?.trim();
-if (!secretKey) throw new Error("AUTH_SECRET environment variable is not set.");
+const secretKey = (process.env.AUTH_SECRET ?? process.env.DASHBOARD_ALLOWED_IP ?? "").trim();
 
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 
 const AccountSchema = new Schema({
     email:     { type: String, required: true, unique: true },
     username:  { type: String, required: true, unique: true },
-    password:  { type: String, default: "" },
+    password:  { type: String, required: true },
     type:      { type: String, default: "user" },
     createdAt: { type: Date, default: Date.now },
 });
 
 const ProjectSchema = new Schema({
     ownerId:     { type: Types.ObjectId, required: true, ref: "Account" },
-    associatedAccounts: {type: Array},
     title:       { type: String, required: true },
     description: { type: String, default: "" },
     status:      { type: String, enum: ["not_started", "in_progress", "review", "complete"], default: "not_started" },
@@ -65,25 +61,20 @@ type Collection  = "sponsorship" | "partnership";
 // ─── Auth helpers ───────────────────────────────────────────────────────────────
 
 function hashPassword(raw: string): string {
-    return bcrypt.hashSync(raw, 12);
+    return encryptjs.encrypt(raw, secretKey, 256);
 }
 
 function verifyPassword(raw: string, stored: string): boolean {
-    if (!stored) return false; // Google-auth accounts have no password
-    return bcrypt.compareSync(raw, stored);
+    try {
+        return encryptjs.decrypt(stored, secretKey, 256) === raw;
+    } catch {
+        return false;
+    }
 }
 
 async function getUid(): Promise<string | null> {
     const cookieStore = await cookies();
     return cookieStore.get("session_uid")?.value ?? null;
-}
-
-async function requireAdmin(): Promise<void> {
-    const uid = await getUid();
-    if (!uid) throw new Error("Not logged in.");
-    await connectDB();
-    const account = await Account.findById(uid).lean() as any;
-    if (account?.type !== "admin") throw new Error("Unauthorized.");
 }
 
 // ─── Auth actions ───────────────────────────────────────────────────────────────
@@ -122,7 +113,7 @@ export async function login(prevState: ActionState, formData: FormData): Promise
         if (!password) return { success: false, error: "Password is required." };
 
         const account = await Account.findOne({ email }).lean() as any;
-        if (!account)                              return { success: false, error: "No account found with that email." };
+        if (!account)                          return { success: false, error: "No account found with that email." };
         if (!verifyPassword(password, account.password)) return { success: false, error: "Incorrect password." };
 
         const cookieStore = await cookies();
@@ -203,7 +194,7 @@ export async function deleteProject(id: string): Promise<void> {
 // ─── Admin actions ──────────────────────────────────────────────────────────────
 
 export async function updateStatus(id: string, collection: Collection, status: Status) {
-    await requireAdmin();
+    await connectDB();
     const Model = collection === "sponsorship" ? Sponsorship : Partnership;
     await Model.findByIdAndUpdate(id, { status });
     revalidatePath("/dashboard");
