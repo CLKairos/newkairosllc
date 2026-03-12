@@ -263,8 +263,6 @@ function ProjectsTable({ projects }: { projects: ProjectRow[] }) {
                         <td>
                             <a
                             href={`/dashboard/project/${p.id}`}
-                            target="_blank"
-                            rel="noreferrer"
                             style={{ color: "#e2e8f0", fontWeight: 500, textDecoration: "none" }}
                             >
                             {p.title}
