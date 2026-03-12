@@ -264,3 +264,76 @@ export async function updateProject(id: string, data: {
     revalidatePath(`/dashboard/project/${id}`);
     revalidatePath("/dashboard");
 }
+export async function updateUsername(username: string): Promise<ActionState> {
+    try {
+        const user = await getSession();
+        if (!user) return { success: false, error: "Not logged in." };
+
+        const trimmed = username.trim();
+        if (!trimmed) return { success: false, error: "Username is required." };
+        if (trimmed.length < 2) return { success: false, error: "Username must be at least 2 characters." };
+
+        await connectDB();
+
+        const taken = await Account.findOne({ username: trimmed, _id: { $ne: user.id } }).lean();
+        if (taken) return { success: false, error: "That username is already taken." };
+
+        await Account.findByIdAndUpdate(user.id, { username: trimmed });
+        revalidatePath("/dashboard");
+        return { success: true, error: null };
+    } catch (err) {
+        console.error("updateUsername error:", err);
+        return { success: false, error: "Failed to update username." };
+    }
+}
+
+export async function updatePasswordDB(newPassword: string): Promise<ActionState> {
+    try {
+        const user = await getSession();
+        if (!user) return { success: false, error: "Not logged in." };
+        if (newPassword.length < 8) return { success: false, error: "Password must be at least 8 characters." };
+
+        await connectDB();
+        await Account.findByIdAndUpdate(user.id, { password: hashPassword(newPassword) });
+        return { success: true, error: null };
+    } catch (err) {
+        console.error("updatePasswordDB error:", err);
+        return { success: false, error: "Failed to update password." };
+    }
+}
+
+export async function updateEmailDB(newEmail: string): Promise<ActionState> {
+    try {
+        const user = await getSession();
+        if (!user) return { success: false, error: "Not logged in." };
+
+        const email = newEmail.trim().toLowerCase();
+        if (!email) return { success: false, error: "Email is required." };
+
+        await connectDB();
+        const taken = await Account.findOne({ email, _id: { $ne: user.id } }).lean();
+        if (taken) return { success: false, error: "That email is already in use." };
+
+        await Account.findByIdAndUpdate(user.id, { email, emailVerified: false });
+        revalidatePath("/dashboard");
+        return { success: true, error: null };
+    } catch (err) {
+        console.error("updateEmailDB error:", err);
+        return { success: false, error: "Failed to update email." };
+    }
+}
+
+export async function markEmailVerified(): Promise<ActionState> {
+    try {
+        const user = await getSession();
+        if (!user) return { success: false, error: "Not logged in." };
+
+        await connectDB();
+        await Account.findByIdAndUpdate(user.id, { emailVerified: true });
+        revalidatePath("/dashboard");
+        return { success: true, error: null };
+    } catch (err) {
+        console.error("markEmailVerified error:", err);
+        return { success: false, error: "Failed to mark email as verified." };
+    }
+}

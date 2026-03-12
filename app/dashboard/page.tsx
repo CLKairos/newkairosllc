@@ -5,6 +5,8 @@ import DashTabs from "../components/DashTabs";
 import { getSession } from "@/app/session";
 import { redirect } from "next/navigation";
 import { Schema, models, model, Types } from "mongoose";
+import ProfilePanel from "@/app/components/ProfilePanel";
+import ProjectControls from "../components/ProjectControls";
 
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 
@@ -76,13 +78,17 @@ export interface ProjectRow {
 }
 
 // Data fetching
-async function getData() {
+async function getData(userId: string, isAdmin: boolean) {
     await connectDB();
+
+    const projectQuery = isAdmin
+        ? {}
+        : { $or: [{ ownerId: new Types.ObjectId(userId) }, { associatedIds: new Types.ObjectId(userId) }] };
 
     const [sponsorships, partnerships, projects, accounts] = await Promise.all([
         Sponsorship.find().sort({ createdAt: -1 }).lean(),
         Partnership.find().sort({ createdAt: -1 }).lean(),
-        Project.find().sort({ createdAt: -1 }).lean(),
+        Project.find(projectQuery).sort({ createdAt: -1 }).lean(),
         Account.find().lean(),
     ]);
 
@@ -168,7 +174,6 @@ function StatCard({
         </div>
     );
 }
-
 function SubmissionRow({
                            row,
                            type,
@@ -323,7 +328,7 @@ export default async function Dashboard() {
     const user = await getSession();
     if (!user) redirect("/login");
 
-    const { sponsorships, partnerships, projects } = await getData();
+    const { sponsorships, partnerships, projects } = await getData(user.id, user.type === "admin");
 
     const allSubs = [...sponsorships, ...partnerships];
     const accepted = allSubs.filter((r) => r.status === "accepted").length;
@@ -415,6 +420,11 @@ export default async function Dashboard() {
             </div>
 
             <div className="section">
+                <h2 className="section-title">New Project</h2>
+                <ProjectControls mode="form" />
+            </div>
+
+            <div className="section">
                 <h2 className="section-title">All Projects</h2>
                 <div className="table-wrap">
                     <ProjectsTable projects={projects} />
@@ -423,20 +433,28 @@ export default async function Dashboard() {
         </>
     );
 
+    const profilePanel = (
+        <ProfilePanel user={{
+            id:            user.id,
+            email:         user.email,
+            username:      user.username,
+            emailVerified: user.emailVerified,
+            firebaseUid:   user.firebaseUid,
+        }} />
+    );
+
     return (
         <div className="dash">
             <div className="dash-header">
                 <h1 className="dash-title">KairosLLC Dashboard</h1>
                 <span className="dash-badge">{user.username}</span>
             </div>
-            {user.type === "admin" ? (
-                <DashTabs
-                    submissionsPanel={submissionsPanel}
-                    projectsPanel={projectsPanel}
-                />
-            ) : (
-                projectsPanel
-            )}
+            <DashTabs
+                submissionsPanel={submissionsPanel}
+                projectsPanel={projectsPanel}
+                profilePanel={profilePanel}
+                isAdmin={user.type === "admin"}
+            />
         </div>
     );
 }
