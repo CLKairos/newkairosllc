@@ -1,9 +1,13 @@
+const LOGO_LIGHT = "/K LLC/KLLC-Mint-NoBg.png";
+const LOGO_DARK = "/K LLC/KLLC-Navy-NoBg.png";
+
 export default function Footer() {
     return (
         <footer className="footer-wrap">
             <div className="footer-inner">
                 <div>
-                    <p className="footer-brand"><span className="footer-brand-dot" />KairosLLC</p>
+                    <p className="footer-brand"><img src={LOGO_DARK} className={"logo-dark"} />
+                        <img src={LOGO_LIGHT} className={"logo-light"} />KairosLLC</p>
                     <p className="footer-tagline">Web and software development. Fast, reliable, and priced fairly.</p>
                 </div>
                 <div className="footer-links">
