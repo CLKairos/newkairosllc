@@ -198,7 +198,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     </span>
                         {(isOwner || user.type === "admin") && (
                             <EditProjectForm
-                                id={params.id}
+                                id={id}
                                 initial={{
                                     title:       project.title,
                                     description: project.description || "",
