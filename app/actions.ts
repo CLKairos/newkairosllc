@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { connectDB } from "@/app/lib/db";
 import { Schema, models, model, Types } from "mongoose";
 import bcrypt from "bcryptjs";
-
+import { getSession } from "@/app/session";
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 
 const AccountSchema = new Schema({
@@ -231,4 +231,36 @@ export async function submitPartnership(prevState: ActionState, formData: FormDa
         console.error("submitPartnership error:", err);
         return { success: false, error: "Submission failed. Please try again." };
     }
+}
+
+// Add this to the bottom of @/app/actions.ts
+
+export async function updateProject(id: string, data: {
+    title: string;
+    description: string;
+    status: string;
+    deadline: string | null;
+}): Promise<void> {
+    const user = await getSession();
+    if (!user) throw new Error("Unauthorized");
+
+    await connectDB();
+
+    const project = await Project.findById(id).lean() as any;
+    if (!project) throw new Error("Project not found");
+
+    const isOwner = project.ownerId.toString() === user.id;
+    const isAdmin = user.type === "admin";
+    if (!isOwner && !isAdmin) throw new Error("Forbidden");
+
+    await Project.findByIdAndUpdate(id, {
+        title:       data.title,
+        description: data.description,
+        status:      data.status,
+        deadline:    data.deadline ? new Date(data.deadline) : null,
+        updatedAt:   new Date(),
+    });
+
+    revalidatePath(`/dashboard/project/${id}`);
+    revalidatePath("/dashboard");
 }

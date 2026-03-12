@@ -118,7 +118,7 @@ export default function Navbar() {
 
                         {loggedIn ? (
                             <>
-                                <a href="/user-dashboard" className="navbar-link cta">Dashboard</a>
+                                <a href="/dashboard" className="navbar-link cta">Dashboard</a>
                                 <form action={logout}>
                                     <button type="submit" className="navbar-link logout">Log out</button>
                                 </form>
