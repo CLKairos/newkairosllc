@@ -147,7 +147,7 @@ export default function Navbar() {
 
                     {loggedIn ? (
                         <>
-                            <a href="/user-dashboard" className="navbar-link cta" onClick={() => setOpen(false)}>Dashboard</a>
+                            <a href="/dashboard" className="navbar-link cta" onClick={() => setOpen(false)}>Dashboard</a>
                             <form action={logout}>
                                 <button type="submit" className="navbar-link logout">Log out</button>
                             </form>

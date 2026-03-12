@@ -244,7 +244,12 @@ function ProjectsTable({ projects }: { projects: ProjectRow[] }) {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function Dashboard() {
+<<<<<<< Updated upstream
     const { sponsorships, partnerships, projects } = await getData();
+=======
+    const user = await getSession();
+    if (!user) redirect("/login");
+>>>>>>> Stashed changes
 
     const allSubs   = [...sponsorships, ...partnerships];
     const accepted  = allSubs.filter((r) => r.status === "accepted").length;
