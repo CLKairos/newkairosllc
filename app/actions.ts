@@ -337,3 +337,31 @@ export async function markEmailVerified(): Promise<ActionState> {
         return { success: false, error: "Failed to mark email as verified." };
     }
 }
+
+export async function updateProjectAssociations(
+    projectId: string,
+    emails: string[]
+): Promise<{ added: string[]; notFound: string[] }> {
+    const user = await getSession();
+    if (!user || user.type !== "admin") throw new Error("Forbidden");
+
+    await connectDB();
+
+    const accounts = await Account.find({
+        email: { $in: emails.map((e) => e.toLowerCase().trim()) },
+    }).lean() as any[];
+
+    const foundEmails = accounts.map((a) => a.email);
+    const notFound    = emails.filter((e) => !foundEmails.includes(e.toLowerCase().trim()));
+    const ids         = accounts.map((a) => a._id);
+
+    await Project.findByIdAndUpdate(projectId, {
+        associatedIds: ids,
+        updatedAt:     new Date(),
+    });
+
+    revalidatePath(`/dashboard/project/${projectId}`);
+    revalidatePath("/dashboard");
+
+    return { added: foundEmails, notFound };
+}

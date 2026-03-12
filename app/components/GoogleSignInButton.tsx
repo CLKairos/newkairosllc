@@ -5,9 +5,7 @@ import { useRouter }                             from "next/navigation";
 import { GoogleAuthProvider, signInWithPopup }   from "firebase/auth";
 import { auth }                                  from "@/app/lib/firebase";
 
-type Props = {
-    mode?: "login" | "signup";
-};
+type Props = { mode?: "login" | "signup" };
 
 export function GoogleSignInButton({ mode = "login" }: Props) {
     const router                = useRouter();
@@ -24,17 +22,14 @@ export function GoogleSignInButton({ mode = "login" }: Props) {
             const result   = await signInWithPopup(auth, provider);
             const idToken  = await result.user.getIdToken();
 
-            const res = await fetch("/api/auth/google", {
+            const res  = await fetch("/api/auth/google", {
                 method:  "POST",
                 headers: { "Content-Type": "application/json" },
                 body:    JSON.stringify({ idToken }),
             });
 
             const data = await res.json();
-            if (!res.ok) {
-                setError(data.error ?? `Google ${mode} failed.`);
-                return;
-            }
+            if (!res.ok) { setError(data.error ?? `Google ${mode} failed.`); return; }
 
             router.push("/dashboard");
         } catch (err: any) {
@@ -47,49 +42,6 @@ export function GoogleSignInButton({ mode = "login" }: Props) {
 
     return (
         <>
-            <style>{`
-                .google-btn {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                    width: 100%;
-                    padding: 10px 16px;
-                    background: transparent;
-                    border: 1px solid #1e2330;
-                    border-radius: 4px;
-                    color: #94a3b8;
-                    font-family: 'Courier New', monospace;
-                    font-size: 12px;
-                    font-weight: 700;
-                    letter-spacing: 1px;
-                    text-transform: uppercase;
-                    cursor: pointer;
-                    transition: border-color 0.15s, color 0.15s, background 0.15s;
-                }
-                .google-btn:hover:not(:disabled) {
-                    border-color: #475569;
-                    color: #e2e8f0;
-                    background: #161b27;
-                }
-                .google-btn:disabled {
-                    opacity: 0.4;
-                    cursor: not-allowed;
-                }
-                .google-icon {
-                    width: 16px;
-                    height: 16px;
-                    flex-shrink: 0;
-                }
-                .google-error {
-                    margin-top: 8px;
-                    font-family: 'Courier New', monospace;
-                    font-size: 12px;
-                    color: #f87171;
-                    text-align: center;
-                }
-            `}</style>
-
             <button className="google-btn" onClick={handleGoogleAuth} disabled={loading}>
                 {!loading && (
                     <svg className="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +53,6 @@ export function GoogleSignInButton({ mode = "login" }: Props) {
                 )}
                 {loading ? "Please wait..." : label}
             </button>
-
             {error && <p className="google-error">{error}</p>}
         </>
     );
