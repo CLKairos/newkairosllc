@@ -126,6 +126,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
           gap: 20px;
           margin-bottom: 40px;
+          min-width: 720px;
         }
         .meta-card {
           background: #161b27;
