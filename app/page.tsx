@@ -19,7 +19,7 @@ export default function Home() {
             <section className="home-hero">
                 <div className="home-hero-bg" />
                 <div className="home-hero-grid" />
-                <span className="home-hero-eyebrow">KairosLLC — Anna, TX</span>
+                <span className="home-hero-eyebrow">CLKairos — Anna, TX</span>
                 <h1 className="home-hero-title">We build software<br /><em>that ships.</em></h1>
                 <p className="home-hero-sub">Web and software development for people and businesses who can't afford to wait. Fast, reliable, and priced fairly.</p>
                 <div className="home-hero-cta-row">

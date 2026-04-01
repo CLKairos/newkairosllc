@@ -32,7 +32,7 @@ export default function Navbar() {
                 <a href="/" className="navbar-brand">
                     <img src={LOGO_DARK} className={"logo-dark"} />
                     <img src={LOGO_LIGHT} className={"logo-light"} />
-                    KairosLLC
+                    CLKairos
                 </a>
 
                 <div className="navbar-links">
