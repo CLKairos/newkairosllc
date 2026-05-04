@@ -444,7 +444,7 @@ export default async function Dashboard() {
     return (
         <div className="dash">
             <div className="dash-header">
-                <h1 className="dash-title">KairosLLC Dashboard</h1>
+                <h1 className="dash-title">CLKairos Dashboard</h1>
                 <span className="dash-badge">{user.username}</span>
             </div>
             <DashTabs

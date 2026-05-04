@@ -2365,6 +2365,51 @@ th {
 .profile-success { font-family: var(--font-mono); font-size: 11px; color: #4aaa6a; margin-top: 10px; }
 .profile-error   { font-family: var(--font-mono); font-size: 11px; color: #d04040; margin-top: 10px; }
 
+.ud-card-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.ud-select {
+    flex: 1;
+    padding: 7px 10px;
+    background: #020480;
+    border: 1px solid #0e1098;
+    color: #c6e8d0;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+}
+
+.ud-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ud-delete-btn {
+    padding: 7px 12px;
+    background: var(--color-denied-bg);
+    border: 1px solid var(--color-denied-bdr);
+    color: var(--color-denied);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.ud-delete-btn:hover:not(:disabled) {
+    background: #881818;
+    color: #fff;
+}
+
+.ud-delete-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 .verified-badge {
     display: inline-flex;
     align-items: center;

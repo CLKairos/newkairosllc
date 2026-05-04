@@ -16,11 +16,13 @@ const STATUS_OPTIONS: { value: ProjectStatus; label: string }[] = [
 // ── Logout button ──────────────────────────────────────────────────────────────
 function LogoutButton() {
     const [pending, startTransition] = useTransition();
+
     return (
         <button
+            type="button"
             className="ud-logout-btn"
             disabled={pending}
-            onClick={() => startTransition(() => { logout(); })}
+            onClick={() => startTransition(() => logout())}
         >
             {pending ? "Signing out..." : "Sign out"}
         </button>
@@ -28,58 +30,45 @@ function LogoutButton() {
 }
 
 // ── Status + delete controls on each card ─────────────────────────────────────
-function CardControls({ projectId, currentStatus }: { projectId: string; currentStatus: ProjectStatus }) {
+function CardControls({
+                          projectId,
+                          currentStatus
+                      }: {
+    projectId: string;
+    currentStatus: ProjectStatus;
+}) {
     const [pending, startTransition] = useTransition();
 
     function handleStatus(e: React.ChangeEvent<HTMLSelectElement>) {
         const next = e.target.value as ProjectStatus;
-        startTransition(() => { updateProjectStatus(projectId, next); });
+        startTransition(() => updateProjectStatus(projectId, next));
     }
 
     function handleDelete() {
         if (!confirm("Delete this project? This can't be undone.")) return;
-        startTransition(() => { deleteProject(projectId); });
+        startTransition(() => deleteProject(projectId));
     }
 
     return (
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
+        <div className="ud-card-controls">
             <select
+                className="ud-select"
                 value={currentStatus}
                 onChange={handleStatus}
                 disabled={pending}
-                style={{
-                    flex: 1,
-                    padding: "7px 10px",
-                    background: "#0a1212",
-                    border: "1px solid rgba(61,107,107,0.25)",
-                    borderRadius: 6,
-                    color: "#e0eeee",
-                    fontSize: 12,
-                    fontFamily: "'DM Sans', sans-serif",
-                    cursor: "pointer",
-                }}
             >
                 {STATUS_OPTIONS.map((o) => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
+                    <option key={o.value} value={o.value}>
+                        {o.label}
+                    </option>
                 ))}
             </select>
+
             <button
+                type="button"
                 onClick={handleDelete}
                 disabled={pending}
-                style={{
-                    padding: "7px 12px",
-                    background: "rgba(248,113,113,0.08)",
-                    border: "1px solid rgba(248,113,113,0.2)",
-                    borderRadius: 6,
-                    color: "#f87171",
-                    fontSize: 12,
-                    fontWeight: 700,
-                    fontFamily: "'DM Sans', sans-serif",
-                    cursor: "pointer",
-                    transition: "background 0.15s",
-                }}
-                onMouseOver={(e) => (e.currentTarget.style.background = "rgba(248,113,113,0.18)")}
-                onMouseOut={(e)  => (e.currentTarget.style.background = "rgba(248,113,113,0.08)")}
+                className="ud-delete-btn"
             >
                 Delete
             </button>
@@ -99,20 +88,41 @@ function NewProjectForm() {
             <div className="ud-form-grid">
                 <div className="ud-field">
                     <label className="ud-label" htmlFor="title">Project title</label>
-                    <input className="ud-input" type="text" id="title" name="title" placeholder="e.g. Company website" required />
+                    <input
+                        className="ud-input"
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Company website"
+                        required
+                    />
                 </div>
+
                 <div className="ud-field">
                     <label className="ud-label" htmlFor="deadline">Deadline (optional)</label>
-                    <input className="ud-input" type="date" id="deadline" name="deadline" />
+                    <input
+                        className="ud-input"
+                        type="date"
+                        id="deadline"
+                        name="deadline"
+                    />
                 </div>
+
                 <div className="ud-field full">
                     <label className="ud-label" htmlFor="description">Description (optional)</label>
-                    <textarea className="ud-textarea" id="description" name="description" placeholder="What do you need built?" />
+                    <textarea
+                        className="ud-textarea"
+                        id="description"
+                        name="description"
+                        placeholder="What do you need built?"
+                    />
                 </div>
             </div>
 
             <div className="ud-form-actions">
-                <button type="submit" className="ud-submit">Create project →</button>
+                <button type="submit" className="ud-submit">
+                    Create project →
+                </button>
             </div>
         </form>
     );
@@ -125,10 +135,15 @@ interface Props {
     currentStatus?: ProjectStatus;
 }
 
-export default function ProjectControls({ mode, projectId, currentStatus }: Props) {
+export default function ProjectControls({
+                                            mode,
+                                            projectId,
+                                            currentStatus
+                                        }: Props) {
     if (mode === "logout") return <LogoutButton />;
     if (mode === "form")   return <NewProjectForm />;
     if (mode === "card" && projectId && currentStatus)
         return <CardControls projectId={projectId} currentStatus={currentStatus} />;
+
     return null;
 }
