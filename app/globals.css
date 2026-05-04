@@ -1400,7 +1400,7 @@ body {
     letter-spacing: -1px;
 }
 
-.auth-left-title em { font-style: italic; font-weight: 400; color: transparent; -webkit-text-stroke: 1px rgba(168, 213, 181, 0.4); }
+.auth-left-title em { font-style: italic; font-weight: 400; color: transparent; -webkit-text-stroke: 4px rgba(168, 213, 181, 1); }
 
 .auth-left-sub {
     font-family: var(--font-sans);
