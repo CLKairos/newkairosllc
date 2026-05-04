@@ -7,8 +7,8 @@ export default function Footer() {
             <div className="footer-inner">
                 <div>
                     <p className="footer-brand"><img src={LOGO_DARK} className={"logo-dark"} />
-                        <img src={LOGO_LIGHT} className={"logo-light"} />KairosLLC</p>
-                    <p className="footer-tagline">Web and software development. Fast, reliable, and priced fairly.</p>
+                        <img src={LOGO_LIGHT} className={"logo-light"} />CLKairos</p>
+                    <p className="footer-tagline">Web and software development services.</p>
                 </div>
                 <div className="footer-links">
                     <div className="footer-col">

@@ -6,14 +6,14 @@ export default function About() {
                 <div className="hero-grid" />
                 <p className="hero-eyebrow">About us</p>
                 <h1 className="hero-title">Built on one idea:<br /><em>time is money.</em></h1>
-                <p className="hero-sub">KairosLLC exists to close the gap between a good idea and a live product — without the wait or the markup.</p>
+                <p className="hero-sub">CLKairos exists to close the gap between a good idea and a live product; without the wait or the markup.</p>
             </section>
 
             <div className="about-body">
                 <div>
                     <p className="about-lead">We're a for-profit dev group that treats your deadlines like our own.</p>
-                    <p className="about-para">Founded by Christian Larsen IV, KairosLLC was built around a straightforward observation: most software agencies are slow, expensive, and impersonal. We set out to be the opposite.</p>
-                    <p className="about-para">We combine solid engineering with a lean process to ship web and software products faster than firms twice our size — at a fraction of the cost. Our partners and sponsors can confirm it. So can our track record.</p>
+                    <p className="about-para">Founded by Christian Larsen IV, CLKairos was built around a straightforward observation: most software agencies are slow, expensive, and impersonal. We set out to be the opposite.</p>
+                    <p className="about-para">We combine solid engineering with a lean process to ship web and software products faster than firms twice our size; at a fraction of the cost. Our partners and sponsors can confirm it. So can our track record.</p>
                     <p className="about-para">We're not trying to be the biggest agency. We're trying to be the one you trust to get it done right the first time.</p>
                 </div>
                 <div className="about-values">
