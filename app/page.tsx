@@ -2,34 +2,34 @@ export default function Home() {
     const services = [
         { 
             title: "Custom Websites", 
-            description: "Beautiful, responsive websites built with modern technology tailored to your business needs.",
+            description: "Professional websites built to represent your brand with clean design and modern technology.",
         },
         { 
             title: "Web Applications", 
-            description: "Full-featured web apps that scale with your business, from concept to deployment.",
+            description: "Scalable web apps designed to grow with your business and deliver results.",
         },
         { 
             title: "E-Commerce Solutions", 
-            description: "Complete online stores with payment processing and inventory management.",
+            description: "Complete online stores with secure payments, inventory management, and customer tools.",
         },
         { 
             title: "Maintenance & Support", 
-            description: "Ongoing technical support, updates, and optimization for your web presence.",
+            description: "Ongoing support, security updates, and optimization to keep your site running smoothly.",
         },
     ];
 
     const whyUs = [
         {
             title: "Expertise",
-            description: "Experienced web developers with proven track records across all modern web technologies."
+            description: "CLKairos specializes in web development with years of proven experience delivering quality projects."
         },
         {
             title: "Quality",
-            description: "Unwavering commitment to excellence in every line of code and design decision."
+            description: "We build with excellence in every detail—from pixel-perfect design to reliable, efficient code."
         },
         {
             title: "Full Service",
-            description: "End-to-end solutions from concept, design, development through deployment and support."
+            description: "From initial concept through design, development, launch, and ongoing support—we handle it all."
         },
     ];
 
@@ -39,11 +39,11 @@ export default function Home() {
             <section className="hero" id="hero">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        Build Your Future <br />
-                        <span className="highlight">With Confidence</span>
+                        Web Development <br />
+                        <span className="highlight">Built Right</span>
                     </h1>
                     <p className="hero-subtitle">
-                        Professional web development services. Beautiful, responsive websites and applications built with modern technology.
+                        CLKairos specializes in professional web development. Beautiful, responsive websites and applications built to last.
                     </p>
                     <div className="hero-cta">
                         <a href="#contact" className="btn btn-primary">Start Your Project</a>
@@ -55,7 +55,7 @@ export default function Home() {
             {/* What We Do Section */}
             <section className="services" id="services">
                 <div className="services-header">
-                    <h2 className="section-title">What We Do</h2>
+                    <h2 className="section-title">What We Build</h2>
                 </div>
                 <div className="services-grid">
                     {services.map((service) => (
@@ -70,7 +70,7 @@ export default function Home() {
             {/* Why CLKairos Section */}
             <section className="why-section" id="about">
                 <div className="why-header">
-                    <h2 className="section-title">Why CLKairos</h2>
+                    <h2 className="section-title">Why Choose CLKairos</h2>
                 </div>
                 <div className="why-grid">
                     {whyUs.map((item) => (
@@ -85,10 +85,10 @@ export default function Home() {
             {/* CTA Section */}
             <section className="cta-section" id="contact">
                 <div className="cta-content">
-                    <h2 className="cta-title">Let's Build Something Great</h2>
-                    <p className="cta-subtitle">Transform your ideas into powerful web solutions.</p>
+                    <h2 className="cta-title">Ready to Get Started?</h2>
+                    <p className="cta-subtitle">Let's build your next web project together.</p>
                     <div className="cta-buttons">
-                        <a href="https://github.com/CLKairos" className="btn btn-primary">Get In Touch</a>
+                        <a href="https://github.com/CLKairos" className="btn btn-primary">Contact Us</a>
                     </div>
                 </div>
             </section>
