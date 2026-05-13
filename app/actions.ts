@@ -77,13 +77,16 @@ async function getUid(): Promise<string | null> {
 export async function signUp(prevState: ActionState, formData: FormData): Promise<ActionState> {
     try {
         await connectDB();
-        const email    = formData.get("email")?.toString().trim().toLowerCase();
-        const username = formData.get("username")?.toString().trim();
-        const password = formData.get("password")?.toString();
+        const email           = formData.get("email")?.toString().trim().toLowerCase();
+        const username        = formData.get("username")?.toString().trim();
+        const password        = formData.get("password")?.toString();
+        const confirmPassword = formData.get("confirmPassword")?.toString();
 
         if (!email)    return { success: false, error: "Email is required." };
         if (!username) return { success: false, error: "Username is required." };
         if (!password) return { success: false, error: "Password is required." };
+        if (!confirmPassword) return { success: false, error: "Please confirm your password." };
+        if (password !== confirmPassword) return { success: false, error: "Passwords do not match." };
         if (password.length < 8) return { success: false, error: "Password must be at least 8 characters." };
 
         const existing = await Account.findOne({ $or: [{ email }, { username }] }).lean() as any;
