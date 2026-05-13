@@ -1687,7 +1687,7 @@ body {
     font-family: var(--font-mono);
     font-size: 26px;
     font-weight: 400;
-    color: #e0f0e8;
+    color: var(--navy);
     letter-spacing: -0.5px;
     margin: 0;
 }
@@ -1724,7 +1724,7 @@ body {
     background: none;
     border: none;
     border-bottom: 2px solid transparent;
-    color: #5a60a8;
+    color: var(--navy);
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s;
     margin-bottom: -1px;
@@ -1767,7 +1767,7 @@ body {
 .stat-label {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: #5a60a8;
+    color: var(--navy);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -1787,7 +1787,7 @@ body {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #5a60a8;
+    color: var(--navy);
     margin: 0 0 18px;
     display: flex;
     align-items: center;
@@ -1818,14 +1818,14 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4a5098;
+    color: var(--navy);
     font-weight: 400;
     border-bottom: 1px solid #0e1098;
 }
 
 .submission-row td {
     padding: 14px 18px;
-    color: #a8d0c0;
+    color: var(--navy);
     border-bottom: 1px solid #111110;
     vertical-align: middle;
     font-family: var(--font-mono);
