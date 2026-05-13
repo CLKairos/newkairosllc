@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
             email:         email.toLowerCase(),
             username,
             password:      bcrypt.hashSync(password, 12),
+            type: "user",
             emailVerified: false,
             firebaseUid:   firebaseUser.uid,
         });

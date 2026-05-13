@@ -1,63 +1,95 @@
 export default function Home() {
-    const faqs = [
-        { title: "Who are we?",          info: "A for-profit dev group run by Christian Larsen IV. We help people and businesses get web and software ideas into production; fast and reliably." },
-        { title: "What do we do?",       info: "Website and software development. If you need a site built or a program developed, we get it done with better quality and better pricing than most big agencies." },
-        { title: "Why should I trust you?", info: "Our partners and sponsors can vouch for us. We have a track record of delivering above expectations. Check the Partners, Sponsors, and Projects pages for proof." },
-        { title: "How do I get in touch?",  info: "Head to the Contact page. You'll find everything you need to start a partnership or kick off a project." },
-        { title: "How can I sponsor you?",  info: "Visit the Sponsors page and scroll to the bottom. Fill out the form and we'll be in touch." },
-        { title: "Where can I learn more?", info: "The About page has everything in detail; who we are, what we've built, and where we're headed." },
+    const services = [
+        { 
+            title: "Custom Websites", 
+            description: "Beautiful, responsive websites built with modern technology tailored to your business needs.",
+        },
+        { 
+            title: "Web Applications", 
+            description: "Full-featured web apps that scale with your business, from concept to deployment.",
+        },
+        { 
+            title: "E-Commerce Solutions", 
+            description: "Complete online stores with payment processing and inventory management.",
+        },
+        { 
+            title: "Maintenance & Support", 
+            description: "Ongoing technical support, updates, and optimization for your web presence.",
+        },
     ];
 
-    const projects = [
-        { label: "Kairos Task Manager",    href: "https://todo.kairosllc.org",              description: "A clean, fast task management tool built in-house.",                                tag: "Productivity" },
-        { label: "AHS SkillsUSA",          href: "https://annaskillsusa.kairosllc.org",      description: "Official site for Anna High School's SkillsUSA chapter.",                         tag: "Education" },
-        { label: "Anna Friends & Foundation",   href: "https://supportannalibrary.org", description: "The Anna Community Library Friends and Foundation website!",                        tag: "Business" },
+    const whyUs = [
+        {
+            title: "Expertise",
+            description: "Experienced web developers with proven track records across all modern web technologies."
+        },
+        {
+            title: "Quality",
+            description: "Unwavering commitment to excellence in every line of code and design decision."
+        },
+        {
+            title: "Full Service",
+            description: "End-to-end solutions from concept, design, development through deployment and support."
+        },
     ];
 
     return (
         <div>
-            <section className="home-hero">
-                <div className="home-hero-bg" />
-                <div className="home-hero-grid" />
-                <span className="home-hero-eyebrow">CLKairos — Anna, TX</span>
-                <h1 className="home-hero-title">Website design starts from <em>scratch</em></h1>
-                <p className="home-hero-sub">Web and software development for people and businesses who can't afford to wait and don't want some squarespace template or AI slop.</p>
-                <div className="home-hero-cta-row">
-                    <a href="/login"  className="hero-cta solid">Start your project</a>
+            {/* Hero Section */}
+            <section className="hero" id="hero">
+                <div className="hero-content">
+                    <h1 className="hero-title">
+                        Build Your Future <br />
+                        <span className="highlight">With Confidence</span>
+                    </h1>
+                    <p className="hero-subtitle">
+                        Professional web development services. Beautiful, responsive websites and applications built with modern technology.
+                    </p>
+                    <div className="hero-cta">
+                        <a href="#contact" className="btn btn-primary">Start Your Project</a>
+                        <a href="#services" className="btn btn-secondary">See Our Services</a>
+                    </div>
                 </div>
             </section>
 
-            <div className="stats-strip">
-                <div className="strip-stat"><span className="strip-num">~6</span><span className="strip-label">Live projects</span></div>
-                <div className="strip-stat"><span className="strip-num">99%</span><span className="strip-label">On-time delivery</span></div>
-                <div className="strip-stat"><span className="strip-num">2</span><span className="strip-label">Point of contact</span></div>
-            </div>
-
-            <section className="page-section alt">
-                <p className="section-label">Common questions</p>
-                <h2 className="section-heading">Everything you need to know</h2>
-                <div className="faq-grid">
-                    {faqs.map((faq) => (
-                        <div className="faq-card" key={faq.title}>
-                            <p className="faq-q">{faq.title}</p>
-                            <p className="faq-a">{faq.info}</p>
+            {/* What We Do Section */}
+            <section className="services" id="services">
+                <div className="services-header">
+                    <h2 className="section-title">What We Do</h2>
+                </div>
+                <div className="services-grid">
+                    {services.map((service) => (
+                        <div key={service.title} className="service-card">
+                            <h3 className="service-title">{service.title}</h3>
+                            <p className="service-description">{service.description}</p>
                         </div>
                     ))}
                 </div>
             </section>
 
-            <section className="page-section">
-                <p className="section-label">Featured work</p>
-                <h2 className="section-heading">Projects we've shipped</h2>
-                <div className="home-projects-grid">
-                    {projects.map((p) => (
-                        <a href={p.href} className="home-project-card" key={p.href} target="_blank" rel="noreferrer">
-                            <span className="project-tag">{p.tag}</span>
-                            <span className="project-name">{p.label}</span>
-                            <span className="project-desc">{p.description}</span>
-                            <span className="project-arrow">View project →</span>
-                        </a>
+            {/* Why CLKairos Section */}
+            <section className="why-section" id="about">
+                <div className="why-header">
+                    <h2 className="section-title">Why CLKairos</h2>
+                </div>
+                <div className="why-grid">
+                    {whyUs.map((item) => (
+                        <div key={item.title} className="why-card">
+                            <h3 className="why-title">{item.title}</h3>
+                            <p className="why-description">{item.description}</p>
+                        </div>
                     ))}
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="cta-section" id="contact">
+                <div className="cta-content">
+                    <h2 className="cta-title">Let's Build Something Great</h2>
+                    <p className="cta-subtitle">Transform your ideas into powerful web solutions.</p>
+                    <div className="cta-buttons">
+                        <a href="https://github.com/CLKairos" className="btn btn-primary">Get In Touch</a>
+                    </div>
                 </div>
             </section>
         </div>

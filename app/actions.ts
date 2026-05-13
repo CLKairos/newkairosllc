@@ -107,7 +107,7 @@ export async function login(prevState: ActionState, formData: FormData): Promise
         if (!email)    return { success: false, error: "Email is required." };
         if (!password) return { success: false, error: "Password is required." };
 
-        const account = await Account.findOne({ email }).lean() as any;
+        const account = await Account.findOne({ email }).lean();
         if (!account)                          return { success: false, error: "No account found with that email." };
         if (!verifyPassword(password, account.password)) return { success: false, error: "Incorrect password." };
 
@@ -117,7 +117,7 @@ export async function login(prevState: ActionState, formData: FormData): Promise
             secure:   process.env.NODE_ENV === "production",
             sameSite: "lax",
             path:     "/",
-            maxAge:   60 * 60 * 24 * 7,
+            maxAge:   60 * 60 * 24,
         });
 
         return { success: true, error: null };

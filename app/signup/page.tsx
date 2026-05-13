@@ -21,7 +21,7 @@ export default function Signup() {
 
                 <a href="/" className="auth-left-logo">
                     <span className="auth-left-logo-dot" />
-                    KairosLLC
+                    CLKairos
                 </a>
 
                 <div className="auth-left-content">
