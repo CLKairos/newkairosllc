@@ -1667,8 +1667,10 @@ body {
     min-height: 100vh;
     background: #02047a;
     color: #c6e8d0;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     padding: 52px 44px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .dash-header {
@@ -1773,7 +1775,12 @@ body {
 /* ─────────────────────────────────────────────
    Dashboard — Sections & Tables
 ───────────────────────────────────────────── */
-.section { margin-bottom: 60px; }
+.section { 
+    margin-bottom: 60px; 
+    background: rgba(4, 6, 138, 0.4);
+    border: 1px solid #0e1098;
+    padding: 28px;
+}
 
 .section-title {
     font-family: var(--font-mono);
@@ -1792,9 +1799,15 @@ body {
 .table-wrap {
     overflow-x: auto;
     border: 1px solid #0e1098;
+    background: #04068a;
 }
 
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 13px;
+    line-height: 1.5;
+}
 
 thead tr { background: #04068a; }
 
@@ -1911,34 +1924,40 @@ th {
 }
 
 .ud-input {
-    padding: 10px 14px;
+    padding: 12px 14px;
     background: #020480;
     border: 1px solid #0e1098;
     color: #c6e8d0;
-    font-family: var(--font-mono);
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: 14px;
     outline: none;
-    transition: border-color 0.15s;
-    border-radius: 0;
+    transition: border-color 0.15s, background 0.15s;
+    border-radius: 2px;
 }
 
-.ud-input:focus { border-color: var(--accent); }
+.ud-input:focus { 
+    border-color: var(--accent);
+    background: #030680;
+}
 
 .ud-textarea {
-    padding: 10px 14px;
+    padding: 12px 14px;
     background: #020480;
     border: 1px solid #0e1098;
     color: #c6e8d0;
-    font-family: var(--font-mono);
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: 14px;
     outline: none;
     resize: vertical;
-    min-height: 88px;
-    transition: border-color 0.15s;
-    border-radius: 0;
+    min-height: 100px;
+    transition: border-color 0.15s, background 0.15s;
+    border-radius: 2px;
 }
 
-.ud-textarea:focus { border-color: var(--accent); }
+.ud-textarea:focus { 
+    border-color: var(--accent);
+    background: #030680;
+}
 
 .ud-form-actions { display: flex; justify-content: flex-end; }
 
