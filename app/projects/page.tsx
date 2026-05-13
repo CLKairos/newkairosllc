@@ -7,7 +7,7 @@ const projects = [
 
 export default function Projects() {
     return (
-        <div>
+        <div className="projects-page dash">
             <section className="page-hero">
                 <div className="hero-grid" />
                 <p className="hero-eyebrow">Our work</p>
