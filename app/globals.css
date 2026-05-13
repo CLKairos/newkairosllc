@@ -1992,8 +1992,8 @@ th {
 ───────────────────────────────────────────── */
 .project-page {
     min-height: 100vh;
-    background: #02047a;
-    color: #c6e8d0;
+    background: var(--bg-card);
+    color: var(--text-body);
     font-family: var(--font-mono);
     padding: 52px 44px;
     max-width: 880px;
@@ -2002,7 +2002,7 @@ th {
 
 .project-back-link {
     display: inline-block;
-    color: #4a5098;
+    color: var(--navy);
     font-family: var(--font-mono);
     font-size: 10px;
     text-decoration: none;
@@ -2024,7 +2024,7 @@ th {
     font-family: var(--font-display);
     font-size: 32px;
     font-weight: 900;
-    color: #e0f0e8;
+    color: var(--navy);
     margin: 0 0 12px;
     letter-spacing: -0.5px;
 }
@@ -2041,12 +2041,12 @@ th {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1px;
     margin-bottom: 44px;
-    background: #0e1098;
-    border: 1px solid #0e1098;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
 }
 
 .meta-card {
-    background: #04068a;
+    background: var(--bg-body);
     padding: 22px 26px;
 }
 
@@ -2055,20 +2055,20 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4a5098;
+    color: var(--navy);
     margin-bottom: 10px;
 }
 
 .meta-value {
     font-family: var(--font-mono);
     font-size: 14px;
-    color: #a8d0c0;
+    color: var(--mint);
     font-weight: 400;
 }
 
 .description-section {
-    background: #04068a;
-    border: 1px solid #0e1098;
+    background: var(--bg-body);
+    border: 1px solid var(--border);
     padding: 32px 36px;
 }
 
@@ -2077,13 +2077,13 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4a5098;
+    color: var(--navy);
     margin-bottom: 18px;
 }
 
 .description-text {
     font-family: var(--font-mono);
-    color: #6a70b8;
+    color: var(--text-body);
     font-size: 13px;
     line-height: 1.8;
     white-space: pre-wrap;
@@ -2112,8 +2112,8 @@ th {
     text-transform: uppercase;
     padding: 8px 22px;
     border: 1px solid #0e1098;
-    background: #020480;
-    color: #6a70b8;
+    background: var(--bg-body);
+    color: var(--text-body);
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s;
     border-radius: 0;
@@ -2132,8 +2132,8 @@ th {
 }
 
 .modal {
-    background: #04068a;
-    border: 1px solid #1a1c9a;
+    background: var(--bg-body);
+    border: 1px solid var(--border);
     padding: 40px 44px;
     width: 100%;
     max-width: 520px;
@@ -2143,7 +2143,7 @@ th {
     font-family: var(--font-mono);
     font-size: 16px;
     font-weight: 400;
-    color: #e0f0e8;
+    color: var(--navy);
     margin: 0 0 32px;
     letter-spacing: -0.3px;
 }
@@ -2156,15 +2156,15 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4a5098;
+    color: var(--navy);
     margin-bottom: 9px;
 }
 
 .field-input {
     width: 100%;
-    background: #02047a;
-    border: 1px solid #0e1098;
-    color: #c6e8d0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-body);
     font-family: var(--font-mono);
     font-size: 13px;
     padding: 10px 14px;
@@ -2199,9 +2199,9 @@ th {
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 9px 22px;
-    border: 1px solid #0e1098;
+    border: 1px solid var(--border);
     background: transparent;
-    color: #5a60a8;
+    color: var(--text-body);
     cursor: pointer;
     border-radius: 0;
     transition: color 0.15s, border-color 0.15s;
