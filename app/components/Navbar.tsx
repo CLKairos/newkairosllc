@@ -41,7 +41,7 @@ export default function Navbar({ user }: Props) {
                     {user ? (
                         <>
                             <a href="/dashboard" className="navbar-link">Dashboard</a>
-                            <a href="/dashboard?tab=profile" className="navbar-link">Profile</a>
+                            <a href="/dashboard" className="navbar-link">Profile</a>
                             <button 
                                 onClick={handleLogout}
                                 disabled={isPending}
@@ -76,7 +76,7 @@ export default function Navbar({ user }: Props) {
                 {user ? (
                     <>
                         <a href="/dashboard" className="navbar-link" onClick={() => setOpen(false)}>Dashboard</a>
-                        <a href="/dashboard?tab=profile" className="navbar-link" onClick={() => setOpen(false)}>Profile</a>
+                        <a href="/dashboard" className="navbar-link" onClick={() => setOpen(false)}>Profile</a>
                         <button 
                             onClick={() => {
                                 setOpen(false);

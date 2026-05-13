@@ -123,6 +123,7 @@ export async function login(prevState: ActionState, formData: FormData): Promise
             maxAge:   60 * 60 * 24,
         });
 
+        revalidatePath("/");
         return { success: true, error: null };
     } catch (err) {
         console.error("login error:", err);
@@ -133,6 +134,7 @@ export async function login(prevState: ActionState, formData: FormData): Promise
 export async function logout(): Promise<void> {
     const cookieStore = await cookies();
     cookieStore.delete("session_uid");
+    revalidatePath("/");
     redirect("/login");
 }
 
