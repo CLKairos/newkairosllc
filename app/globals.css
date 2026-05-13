@@ -1665,8 +1665,8 @@ body {
 ───────────────────────────────────────────── */
 .dash {
     min-height: 100vh;
-    background: #02047a;
-    color: #c6e8d0;
+    background: var(--bg-body);
+    color: var(--text-body);
     font-family: var(--font-sans);
     padding: 52px 44px;
     max-width: 1400px;
