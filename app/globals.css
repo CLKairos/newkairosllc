@@ -1313,6 +1313,7 @@ body {
 .auth-page {
     font-family: var(--font-sans);
     min-height: 100vh;
+    max-width: 1200px;
     display: flex;
     align-items: stretch;
 }
@@ -2320,7 +2321,7 @@ th {
 .profile-wrap { max-width: 640px; display: flex; flex-direction: column; gap: 2px; }
 
 .profile-section {
-    background: #04068a;
+    background: var(--bg-card);
     border: 1px solid #0e1098;
     padding: 32px 36px;
 }
@@ -2331,7 +2332,7 @@ th {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    color: #4a5098;
+    color: var(--navy);
     margin-bottom: 22px;
     padding-bottom: 16px;
     border-bottom: 1px solid #0e1098;
@@ -2344,14 +2345,14 @@ th {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #4a5098;
+    color: var(--navy);
 }
 
 .profile-input {
     padding: 10px 14px;
     background: #02047a;
     border: 1px solid #0e1098;
-    color: #c6e8d0;
+    color: var(--mint);
     font-family: var(--font-mono);
     font-size: 13px;
     outline: none;
@@ -2368,8 +2369,8 @@ th {
     text-transform: uppercase;
     padding: 9px 24px;
     border: 1px solid #0e1098;
-    background: #02047a;
-    color: #6a70b8;
+    background: var(--bg-body);
+    color: var(--navy);
     cursor: pointer;
     border-radius: 0;
     transition: color 0.15s, border-color 0.15s;
@@ -2394,9 +2395,9 @@ th {
 .ud-select {
     flex: 1;
     padding: 7px 10px;
-    background: #020480;
+    background: var(--bg-body);
     border: 1px solid #0e1098;
-    color: #c6e8d0;
+    color: var(--mint);
     font-size: 12px;
     font-family: var(--font-mono);
     cursor: pointer;
