@@ -6,7 +6,7 @@ export default function Contact() {
     ];
 
     return (
-        <div>
+        <div className="contact-page dash">
             <section className="page-hero">
                 <div className="hero-grid" />
                 <p className="hero-eyebrow">Get in touch</p>

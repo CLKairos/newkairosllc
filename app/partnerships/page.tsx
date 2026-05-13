@@ -8,7 +8,7 @@ export default function Partnerships() {
     const [state, action] = useActionState(submitPartnership, null);
 
     return (
-        <div>
+        <div className="partnerships-page dash">
             <section className="page-hero">
                 <div className="hero-grid" />
                 <p className="hero-eyebrow">Partnerships</p>
