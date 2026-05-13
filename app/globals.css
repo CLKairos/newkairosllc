@@ -1665,7 +1665,7 @@ body {
 ───────────────────────────────────────────── */
 .dash {
     min-height: 100vh;
-    background: var(--bg-body);
+    background: var(--bg-card);
     color: var(--text-body);
     font-family: var(--font-sans);
     padding: 52px 44px;
