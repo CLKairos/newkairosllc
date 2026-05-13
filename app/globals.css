@@ -1741,12 +1741,12 @@ body {
     gap: 1px;
     margin-bottom: 52px;
     flex-wrap: wrap;
-    background: #0e1098;
+    background: var(--bg-body);
     border: 1px solid #0e1098;
 }
 
 .stat-card {
-    background: #04068a;
+    background: var(--bg-body);
     padding: 28px 36px;
     display: flex;
     flex-direction: column;
@@ -1794,12 +1794,12 @@ body {
     gap: 12px;
 }
 
-.section-title::after { content: ""; flex: 1; height: 1px; background: #0e1098; }
+.section-title::after { content: ""; flex: 1; height: 1px; background: var(--bg-body); }
 
 .table-wrap {
     overflow-x: auto;
     border: 1px solid #0e1098;
-    background: #04068a;
+    background: var(--bg-body);
 }
 
 table { 
@@ -1809,7 +1809,7 @@ table {
     line-height: 1.5;
 }
 
-thead tr { background: #04068a; }
+thead tr { background: var(--bg-body); }
 
 th {
     text-align: left;
@@ -1833,7 +1833,7 @@ th {
 }
 
 .submission-row:last-child td { border-bottom: none; }
-.submission-row:hover td { background: #04068a; }
+.submission-row:hover td { background: var(--bg-body); }
 
 .row-accepted td:first-child { border-left: 2px solid var(--color-accepted); }
 .row-denied   td:first-child { border-left: 2px solid var(--color-denied); }
