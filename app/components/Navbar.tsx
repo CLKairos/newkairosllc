@@ -8,8 +8,11 @@ const LOGO_LIGHT = "/K LLC/KLLC-Mint-NoBg.png";
 const LOGO_DARK = "/K LLC/KLLC-Navy-NoBg.png";
 
 const pages = [
-    { name: "Services",     location: "#services" },
-    { name: "About",        location: "#about" },
+    { name: "Services",     location: "/#services" },
+    { name: "About",        location: "/#about" },
+    { name: "Partnerships", location: "/partnerships" },
+    { name: "Projects",     location: "/projects" },
+    { name: "Contact",      location: "/contact" },
 ];
 
 interface Props {
@@ -41,7 +44,6 @@ export default function Navbar({ user }: Props) {
                     {user ? (
                         <>
                             <a href="/dashboard" className="navbar-link">Dashboard</a>
-                            <a href="/dashboard" className="navbar-link">Profile</a>
                             <button 
                                 onClick={handleLogout}
                                 disabled={isPending}
