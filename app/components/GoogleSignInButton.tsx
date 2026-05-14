@@ -4,7 +4,6 @@ import { useState }                              from "react";
 import { useRouter }                             from "next/navigation";
 import { GoogleAuthProvider, signInWithPopup }   from "firebase/auth";
 import { auth }                                  from "@/app/lib/firebase";
-
 type Props = { mode?: "login" | "signup" };
 
 export function GoogleSignInButton({ mode = "login" }: Props) {

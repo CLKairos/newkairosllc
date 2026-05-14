@@ -48,11 +48,11 @@ export default function Login() {
                 <div className="auth-form-wrap">
                     <h2 className="auth-form-heading">Sign in</h2>
                     <p className="auth-form-sub">No account? <a href="/signup">Create one</a></p>
-
+                    
                     {state?.error && <p className="auth-error">{state.error}</p>}
 
                     <GoogleSignInButton mode="login" />
-
+                    
                     <div className="auth-divider">
                         <div className="auth-divider-line" />
                         <span className="auth-divider-text">or</span>
