@@ -82,33 +82,6 @@
     --font-mono:    'Syne Mono', 'Courier New', monospace;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-body:        #02047a;
-        --bg-card:        #060a90;
-        --bg-card-alt:    #04068a;
-        --bg-section-alt: #04068a;
-        --bg-input:       #030578;
-
-        --text-body:    var(--mint-light);
-        --text-muted:   var(--mint-dim);
-        --text-heading: var(--mint-light);
-
-        --border-card:  #1a1c9a;
-        --border-input: #1a1c9a;
-        --rule:         var(--mint);
-
-        --shadow-card:  4px 4px 0px rgba(0, 0, 0, 0.5);
-        --shadow-hover: 6px 6px 0px rgba(168, 213, 181, 0.2);
-
-        --value-card-bg: #04068a;
-    }
-
-    .logo-light { display: none; }
-    .logo-dark  { display: block; }
-}
-
 .logo-dark  { display: none; }
 .logo-light { display: block; }
 .logo-dark, .logo-light { width: 40px; }
