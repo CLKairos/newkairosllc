@@ -6,6 +6,11 @@ const partners = [
         image: "https://www.myfarmers.bank/assets/files/jMmEnSPx/Vertical.png",
         link: "https://myfarmers.bank",
     },
+    {
+        name: "Anna Community Library",
+        image: "/friendsofanna.png",
+        link: "https://supportannalibrary.org"
+    }
 ];
 
 export default function PartnerList() {

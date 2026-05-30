@@ -1,5 +1,6 @@
 "use client";
 
+// @ts-ignore
 import { useActionState } from "react";
 import { submitPartnership } from "@/app/actions";
 import PartnerList from "@/app/components/PartnerList";
