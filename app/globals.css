@@ -1310,6 +1310,7 @@ body {
     padding: 60px 48px;
     max-width: 1440px;
     margin: 0 auto;
+    background: white;
 }
 
 .subs-section-label {
@@ -1325,7 +1326,8 @@ body {
 .partner,
 .sponsor {
     display: inline-block;
-    max-width: 100%;
+    max-width: 300px;
+    margin: 5px;
 }
 
 .partner a,
@@ -1338,8 +1340,7 @@ body {
     display: block;
     max-width: 100%;
     height: auto;
-    opacity: 0.7;
-    transition: opacity 0.3s;
+    opacity: 1;
 }
 
 .partner:hover img,
